@@ -8,6 +8,8 @@ class Piece(object):
 		self.x = position[0]
 		self.y = position[1]
 		self.color = color
+		self.toDraw = True
+		self.placedOnBoard = False
 
 	def __eq__(self, other):
 		return (type(self) == type(other) and self.profile == other.profile and self.x == other.x and \
@@ -21,22 +23,25 @@ class Piece(object):
 		for i in range(len(self.profile)):
 			newProf[len(newProf) - i - 1] = self.profile[i]
 		self.profile = newProf
+		return newProf
 
+	# Numpy fliplr function courtesy of https://docs.scipy.org/doc/numpy/reference/generated/numpy.fliplr.html
 	def flipLR(self):
 		npProfile = np.array(self.profile)
 		npProfile = np.fliplr(npProfile)
-		npProfile.tolist()
-		self.profile = npProfile
+		self.profile = npProfile.tolist()
+		return npProfile.tolist()
 
+	#Numpy rot90 function courtesy of https://docs.scipy.org/doc/numpy/reference/generated/numpy.rot90.html
 	def rotateLeft(self):
 		npProfile = np.array(self.profile)
 		npProfile = np.rot90(npProfile, 1, (1,0))
-		npProfile.tolist()
-		self.profile = npProfile
+		self.profile = npProfile.tolist()
+		return npProfile.tolist()
 
 	def rotateRight(self):
 		npProfile = np.array(self.profile)
 		npProfile = np.rot90(npProfile, 1, (0,1))
-		npProfile.tolist()
-		self.profile = npProfile
+		self.profile = npProfile.tolist()
+		return npProfile.tolist()
 
